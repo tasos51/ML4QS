@@ -1,4 +1,9 @@
 *.pyc
-datasets
+*.csv
+*.zip
+*.rar
+*.png
+.ipynb_checkpoints
+.vscode
 PythonCode/intermediate_datafiles/
 PythonCode/Example_graphs/

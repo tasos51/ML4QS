@@ -26,11 +26,16 @@ class DistributionBasedOutlierDetection:
     def chauvenet(self, data_table, col):
         # Taken partly from: https://www.astro.rug.nl/software/kapteyn/
 
+        ''' c is a positive constant number roughly between 1 and 10 that specifies the
+        degree of certainty for the identification of outliers given the assumption of a normal
+        distribution. '''
+        c = 2
+
         # Computer the mean and standard deviation.
         mean = data_table[col].mean()
         std = data_table[col].std()
         N = len(data_table.index)
-        criterion = 1.0/(2*N)
+        criterion = 1.0/(c*N)   # originally, '2' instead of 'c'
 
         # Consider the deviation for the data points.
         deviation = abs(data_table[col] - mean)/std

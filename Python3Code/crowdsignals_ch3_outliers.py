@@ -50,7 +50,7 @@ def main():
     # Step 1: Let us see whether we have some outliers we would prefer to remove.
 
     # Determine the columns we want to experiment on.
-    outlier_columns = ['acc_phone_x', 'light_phone_lux']
+    outlier_columns = ['light_phone_lux']     # ['hr_watch_rate']    # orinally ['acc_phone_x', 'light_phone_lux']
     # Create the outlier classes.
     OutlierDistr = DistributionBasedOutlierDetection()
     OutlierDist = DistanceBasedOutlierDetection()
@@ -135,10 +135,10 @@ if __name__ == '__main__':
     parser.add_argument('--K', type=int, default=5,
                         help="Local Outlier Factor:  K is the number of neighboring points considered")
 
-    parser.add_argument('--dmin', type=int, default=0.10,
+    parser.add_argument('--dmin', type=float, default=0.10,     # originally, type=int
                         help="Simple distance based:  dmin is ... ")
 
-    parser.add_argument('--fmin', type=int, default=0.99,
+    parser.add_argument('--fmin', type=float, default=0.99,     # originally, type=int
                         help="Simple distance based:  fmin is ... ")
 
     FLAGS, unparsed = parser.parse_known_args()

@@ -29,7 +29,7 @@ class DistributionBasedOutlierDetection:
         ''' c is a positive constant number roughly between 1 and 10 that specifies the
         degree of certainty for the identification of outliers given the assumption of a normal
         distribution. '''
-        c = 2
+        c = 2       # added by Alex.
 
         # Computer the mean and standard deviation.
         mean = data_table[col].mean()
@@ -41,8 +41,8 @@ class DistributionBasedOutlierDetection:
         deviation = abs(data_table[col] - mean)/std
 
         # Express the upper and lower bounds.
-        low = -deviation/math.sqrt(2)
-        high = deviation/math.sqrt(2)
+        low = -deviation/math.sqrt(c)   # originally, '2' instead of 'c'
+        high = deviation/math.sqrt(c)   # originally, '2' instead of 'c'
         prob = []
         mask = []
 
@@ -60,10 +60,13 @@ class DistributionBasedOutlierDetection:
     # of observing the value given the mixture model.
     def mixture_model(self, data_table, col):
 
+        N_COMPONENTS = 3        # added by Alex.
+        N_INITIALIZATIONS = 1       # added by Alex.
+
         print('Applying mixture models')
         # Fit a mixture model to our data.
         data = data_table[data_table[col].notnull()][col]
-        g = GaussianMixture(n_components=3, max_iter=100, n_init=1)
+        g = GaussianMixture(n_components=N_COMPONENTS, max_iter=100, n_init=N_INITIALIZATIONS)     # originally n_components=3, max_iter=100, n_init=1
         reshaped_data = np.array(data.values.reshape(-1, 1))
         g.fit(reshaped_data)
 

@@ -71,7 +71,7 @@ def main():
                                     imputed_interpolation_dataset['hr_watch_rate'])
 
     elif FLAGS.mode == 'kalman':
-        # Using the result from Chapter 2, let us try the Kalman filter on the light_phone_lux attribute and study the result.
+        # Using the result from Chapter 2, let us try the Kalman filter on the acc_phone_x attribute and study the result.      # originally 'light_phone_lux' instead of 'acc_phone_x'
         try:
             original_dataset = pd.read_csv(
             DATA_PATH / ORIG_DATASET_FNAME, index_col=0)
@@ -80,12 +80,14 @@ def main():
             print('File not found, try to run previous crowdsignals scripts first!')
             raise e
 
+        FEATURE_DESIRED = 'hr_watch_rate'   # added by Alex.
+
         KalFilter = KalmanFilters()
         kalman_dataset = KalFilter.apply_kalman_filter(
-            original_dataset, 'acc_phone_x')
+            original_dataset, FEATURE_DESIRED)      # originally 'acc_phone_x'
         DataViz.plot_imputed_values(kalman_dataset, [
-                                    'original', 'kalman'], 'acc_phone_x', kalman_dataset['acc_phone_x_kalman'])
-        DataViz.plot_dataset(kalman_dataset, ['acc_phone_x', 'acc_phone_x_kalman'], [
+                                    'original', 'kalman'], FEATURE_DESIRED, kalman_dataset[FEATURE_DESIRED + '_kalman'])     # originally 'acc_phone_x', kalman_dataset['acc_phone_x_kalman'])
+        DataViz.plot_dataset(kalman_dataset, [FEATURE_DESIRED, FEATURE_DESIRED + '_kalman'], [      # originally ['acc_phone_x', 'acc_phone_x_kalman'], [
                              'exact', 'exact'], ['line', 'line'])
 
         # We ignore the Kalman filter output for now...
@@ -183,7 +185,7 @@ if __name__ == '__main__':
                         'lowpass' applies the lowpass-filter to a single variable \
                         'imputation' is used for the next chapter \
                         'PCA' is to study the effect of PCA and plot the results\
-                        'final' is used for the next chapter", choices=['lowpass', 'imputation', 'PCA', 'final'])
+                        'final' is used for the next chapter", choices=['lowpass', 'imputation', 'PCA', 'final', 'kalman'])     # originally no 'kalman' in 'choices=' list
 
    
     FLAGS, unparsed = parser.parse_known_args()

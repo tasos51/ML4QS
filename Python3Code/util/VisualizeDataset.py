@@ -189,8 +189,11 @@ class VisualizeDataset:
         # and plot the others that have resulted from imputation.
         for i in range(1, len(values)+1):
             xar[i].xaxis.set_major_formatter(xfmt)
-            xar[i].plot(data_table.index, values[i-1], 'b+', markersize='2')
+            xar[i].plot(data_table.index, values[i-1], 'b+', markersize='2', color='red')
             xar[i].legend([names[i]], fontsize='small', numpoints=1, loc='upper center',  bbox_to_anchor=(0.5, 1.3), ncol=1, fancybox=True, shadow=True)
+
+            xar[i].plot(data_table.index[data_table[col].notnull()], data_table[col][data_table[col].notnull()], 'b+', markersize='1', color='blue')
+            # xar[0].legend([names[0]], fontsize='small', numpoints=1, loc='upper center',  bbox_to_anchor=(0.5, 1.3), ncol=1, fancybox=True, shadow=True)
 
         # Diplay is nicely in subplots.
         plt.setp([a.get_xticklabels() for a in f.axes[:-1]], visible=False)

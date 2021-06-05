@@ -87,8 +87,8 @@ def main():
             original_dataset, FEATURE_DESIRED)      # originally 'acc_phone_x'
         DataViz.plot_imputed_values(kalman_dataset, [
                                     'original', 'kalman'], FEATURE_DESIRED, kalman_dataset[FEATURE_DESIRED + '_kalman'])     # originally 'acc_phone_x', kalman_dataset['acc_phone_x_kalman'])
-        DataViz.plot_dataset(kalman_dataset, [FEATURE_DESIRED, FEATURE_DESIRED + '_kalman'], [      # originally ['acc_phone_x', 'acc_phone_x_kalman'], [
-                             'exact', 'exact'], ['line', 'line'])
+        # DataViz.plot_dataset(kalman_dataset, [FEATURE_DESIRED, FEATURE_DESIRED + '_kalman'], [      # originally ['acc_phone_x', 'acc_phone_x_kalman'], [
+        #                      'exact', 'exact'], ['line', 'line'])
 
         # We ignore the Kalman filter output for now...
 

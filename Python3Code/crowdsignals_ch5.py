@@ -28,8 +28,8 @@ def main():
 
     # As usual, we set our program constants, read the input file and initialize a visualization object.
     DATA_PATH = Path('./intermediate_datafiles/')
-    DATASET_FNAME = 'chapter4_result.csv'
-    RESULT_FNAME = 'chapter5_result.csv'
+    DATASET_FNAME = 'our_set_4_result.csv'
+    RESULT_FNAME = 'our_set_5_result.csv'
 
     try:
         dataset = pd.read_csv(DATA_PATH / DATASET_FNAME, index_col=0)
@@ -54,7 +54,7 @@ def main():
         for k in k_values:
             print(f'k = {k}')
             dataset_cluster = clusteringNH.k_means_over_instances(copy.deepcopy(
-                dataset), ['acc_phone_x', 'acc_phone_y', 'acc_phone_z'], k, 'default', 20, 10)
+                dataset), ['gyr_phone_x', 'gyr_phone_y', 'gyr_phone_z'], k, 'default', 20, 10)
             silhouette_score = dataset_cluster['silhouette'].mean()
             print(f'silhouette = {silhouette_score}')
             silhouette_values.append(silhouette_score)
@@ -112,8 +112,8 @@ def main():
         for k in k_values:
             print(f'k = {k}')
             dataset, l = clusteringH.agglomerative_over_instances(dataset, [
-                                                                          'acc_phone_x', 'acc_phone_y', 'acc_phone_z'], k, 'euclidean', use_prev_linkage=True, link_function='ward')
-            silhouette_score = dataset_cluster['silhouette'].mean()
+                                                                          'gyr_phone_x', 'gyr_phone_y', 'gyr_phone_z'], k, 'euclidean', use_prev_linkage=True, link_function='ward')
+            silhouette_score = dataset['silhouette'].mean()
             print(f'silhouette = {silhouette_score}')
             silhouette_values.append(silhouette_score)
             if k == k_values[0]:

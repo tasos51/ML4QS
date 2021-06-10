@@ -3,6 +3,7 @@
 *.zip
 *.rar
 *.png
+*.pdf
 .ipynb_checkpoints
 .vscode
 PythonCode/intermediate_datafiles/

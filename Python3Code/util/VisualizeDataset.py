@@ -33,7 +33,7 @@ class VisualizeDataset:
         self.figures_dir.mkdir(exist_ok=True, parents=True)
 
 
-    def save(self, plot_obj, formats=('png',)): # 'svg'
+    def save(self, plot_obj, formats=('pdf',)): # 'svg'
 
         fig_name = f'figure_{self.plot_number}'
 
